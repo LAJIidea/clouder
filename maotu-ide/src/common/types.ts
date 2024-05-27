@@ -1,0 +1,65 @@
+import { ICodeEditor } from "@theia/monaco-editor-core/esm/vs/editor/browser/editorBrowser";
+
+// @ts-ignore
+import type { Text } from "yjs";
+
+export const ICollaborationService = Symbol('ICollaborationService');
+
+export interface ICollaborationService {
+  initialize(): void;
+  initFileWatch(): void;
+  destroy(): void;
+  undoOnFocusedTextModel(): void;
+  redoOnFocusedTextModel(): void;
+  registerContribution(contribution: CollaborationModuleContribution): void;
+  registerUserInfo(): void;
+}
+
+export interface ITextModelBinding {
+  initialize(): void;
+  changeYText(newText: Text): void;
+  undo(): void;
+  redo(): void;
+  addEditor(editor: ICodeEditor): void;
+  removeEditor(editor: ICodeEditor): void;
+  destroy(): void;
+}
+
+export const IYWebsocketServer = Symbol('IYWebsocketServer');
+
+export interface IYWebsocketServer {
+  requestInitContent(uri: string): Promise<void>;
+}
+
+export const CollaborationServiceForClientPath = 'CollaborationServiceForClientPath';
+
+export const ICollaborationServiceForClient = Symbol('ICollaborationServiceForClient');
+
+export interface ICollaborationServiceForClient {
+  requestInitContent(uri: string): Promise<void>;
+}
+
+export const ROOM_NAME = 'y-room-opensumi';
+
+// user model for collaboration module
+export const CollaborationModuleContribution = Symbol('CollaborationModuleContribution')
+
+export interface CollaborationModuleContribution {
+  info: UserInfo;
+}
+
+export interface UserInfo {
+  id: string; // unique id
+  nickname: string; // will be displayed on live cursor
+  // may be more data fields
+}
+
+export interface ICursorWidegtRegistry {
+  updatePositionOf(clientID: number, lineNumber: number, column: number): void;
+
+  removeAllPositions(editor: ICodeEditor): void;
+
+  layoutAllWidgets(): void;
+
+  destroy(): void;
+}

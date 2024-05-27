@@ -1,0 +1,25 @@
+{
+  "private": true,
+  "engines": {
+    "yarn": ">=1.7.0 <2",
+    "node": ">=16"
+  },
+  "scripts": {
+    "build:browser": "yarn --cwd browser-app bundle",
+    "build:electron": "yarn --cwd electron-app bundle",
+    "prepare": "lerna run prepare",
+    "postinstall": "theia check:theia-version",
+    "start:browser": "yarn --cwd browser-app start",
+    "start:electron": "yarn --cwd electron-app start",
+    "watch:browser": "lerna run --parallel watch --ignore electron-app",
+    "test": "cd maotu-ide && yarn test",
+    "watch:electron": "lerna run --parallel watch --ignore browser-app",
+    "test": "cd maotu-ide && yarn test"
+  },
+  "devDependencies": {
+    "lerna": "2.4.0"
+  },
+  "workspaces": [
+    "maotu-ide", "browser-app", "electron-app"
+  ]
+}
