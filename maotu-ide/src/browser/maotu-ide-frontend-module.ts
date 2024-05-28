@@ -5,7 +5,7 @@ import { bindViewContribution, FrontendApplicationContribution, WidgetFactory } 
 
 import '../../src/browser/style/index.css';
 
-export default new ContainerModule(bind => {
+let container = new ContainerModule(bind => {
     bindViewContribution(bind, MaotuIdeContribution);
     bind(FrontendApplicationContribution).toService(MaotuIdeContribution);
     bind(MaotuIdeWidget).toSelf();
@@ -14,3 +14,5 @@ export default new ContainerModule(bind => {
         createWidget: () => ctx.container.get<MaotuIdeWidget>(MaotuIdeWidget)
     })).inSingletonScope();
 });
+
+export default container;
