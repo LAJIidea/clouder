@@ -24,7 +24,6 @@ import { CollaborationUtils } from "./collaboration-utils";
 import throttle = require('@theia/core/shared/lodash.throttle');
 import { CollaborationColorService } from "./collaboration-color-service";
 import { MonacoEditorModel } from "@theia/monaco/lib/browser/monaco-editor-model";
-import { delta } from "@theia/monaco-editor-core/esm/vs/base/common/arrays";
 
 export interface Selection extends Range {
   direction: 'ltr' | 'rtl';
